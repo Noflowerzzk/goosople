@@ -1,99 +1,103 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8"/>
-    <title>现在诗间</title>
+  <meta charset="utf-8" />
+  <title>现在诗间</title>
 
-    <style>
-        body {
-          color: #000000;
-          background-color: #ffffff;
-        }
+  <style>
+    body {
+      color: #000000;
+      background-color: #ffffff;
+    }
 
-        .page {
-          position: fixed;
-          width: 100%;
-          height: 100%;
-        }
+    .page {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
 
-        .time_container,
-        .date_container,
-        .poem_con {
-          width: 100%;
-          margin: auto;
-          text-align: center;
-        }
+    .time_container,
+    .date_container,
+    .poem_con {
+      width: 100%;
+      margin: auto;
+      text-align: center;
+    }
 
-        .time_container {
-          top: 0;
-          height: 40%;
-        }
+    .time_container {
+      top: 0;
+      height: 40%;
+    }
 
-        .date_container {
+    .date_container {}
 
-        }
+    .time {
+      padding-top: 100px;
+      font-size: 12rem;
+    }
 
-        .time {
-          padding-top: 100px;
-          font-size: 12rem;
-        }
+    .date {
+      padding-top: 10px;
+      font-size: 4.5rem;
+    }
 
-        .date {
-          padding-top: 10px;
-          font-size: 4.5rem;
-        }
-
-        .poem_con {
-          padding-top: 10px;
-          font-size: 3rem;
-        }
-    </style>
+    .poem_con {
+      padding-top: 10px;
+      font-size: 3rem;
+    }
+  </style>
 </head>
 
 <body>
-<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-    <div class="page">
-      <div class="time_container">
-          <div class="time" id="time">12:00</div>
-      </div>
-      <div class="date_container">
-          <div class="date" id="date">1月1日</div>
-          <div class="date" id="week">星期一</div>
-      </div>
-<div class="poem_con">
-<div id="poem_sentence" class="poem_con"></div>
-<div id="poem_info" class="poem_con"></div>
-<script type="text/javascript">
-  jinrishici.load(function(result) {
-    var sentence = document.getElementById("poem_sentence")
-    var info = document.getElementById("poem_info")
-    sentence.innerHTML = result.data.content
-    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
-  });
-</script>
-</div>
+  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+  <div id="a">  <div class="page">
+    <div class="time_container">
+      <div class="time" id="time">12:00</div>
     </div>
+    <div class="date_container">
+      <div class="date" id="date">1月1日</div>
+      <div class="date" id="week">星期一</div>
+    </div>
+    <div class="poem_con">
+      <div id="poem_sentence" class="poem_con"></div>
+      <div id="poem_info" class="poem_con"></div>
+      <script type="text/javascript">
+        jinrishici.load(function (result) {
+          var sentence = document.getElementById("poem_sentence")
+          var info = document.getElementById("poem_info")
+          sentence.innerHTML = result.data.content
+          info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+        });
+      </script>
+    </div>
+  </div>
+</div>
 
 
-    <script>
-      function update() {
-        var date = new Date()
-        var utc8DiffMinutes = date.getTimezoneOffset() + 480
-        date.setMinutes(date.getMinutes() + utc8DiffMinutes)
+  <script>
+    function update() {
+      var date = new Date()
+      var utc8DiffMinutes = date.getTimezoneOffset() + 480
+      date.setMinutes(date.getMinutes() + utc8DiffMinutes)
 
-        var timeString = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2)
-        var dateString = (date.getMonth() + 1) + '月' + date.getDate() + '日'
-        var weekList = ['日', '一', '二', '三', '四', '五', '六']
-        var weekString = '星期' + weekList[date.getDay()]
+      var timeString = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2)
+      var dateString = (date.getMonth() + 1) + '月' + date.getDate() + '日'
+      var weekList = ['日', '一', '二', '三', '四', '五', '六']
+      var weekString = '星期' + weekList[date.getDay()]
 
-        document.getElementById("time").innerHTML = timeString
-        document.getElementById("date").innerHTML = dateString
-        document.getElementById("week").innerHTML = weekString
-      }
+      document.getElementById("time").innerHTML = timeString
+      document.getElementById("date").innerHTML = dateString
+      document.getElementById("week").innerHTML = weekString
+    }
 
-      update()
-      setInterval("update()", 60 * 1000)
-    </script>
+    update()
+    setInterval("update()", 60 * 1000)
+
+    document.getElementById('a').addEventListener('touchmove', function (e) {
+      e.preventDefault();
+    })
+  </script>
 </body>
+
 </html>
